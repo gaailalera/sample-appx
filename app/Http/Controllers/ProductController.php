@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = Product::paginate(10);
+        $products = Product::paginate(20);
 
         return view('products.index', compact('products'));
     }
@@ -71,5 +71,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $product->delete();
+
+        return redirect(route('products.index'))->with('status', 'User Successfully Deleted!');
     }
 }

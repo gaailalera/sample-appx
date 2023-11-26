@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('PARCEL RECORDING SYSTEM') }}
+            {{ __('RECORDS FOR INCOMING PARCEL') }}
         </h2>
     </x-slot>
 
@@ -95,7 +95,7 @@
                                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr>
-                                            
+                                            <th scope="col" class="px-4 py-3">NO.</th>
                                             <th scope="col" class="px-4 py-3">Control Number</th>
                                             <th scope="col" class="px-4 py-3">Source of Mail</th>
                                             <th scope="col" class="px-4 py-3">Date/Time Received</th>
@@ -114,15 +114,15 @@
                                     <tbody>
                                         @foreach ($products as $product)
                                             <tr class="border-b dark:border-gray-700">
-                                             
-                                                <td class="px-4 py-3">{{ $product->controlNumber }}</td>
+                                                <td class="px-4 py-3">{{ $product->id }}</td>
+                                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $product->controlNumber }}</th>
                                                 <td class="px-4 py-3">{{ $product->sourceofmail }}</td>
                                                 <th scope="row" class="px-4 py-3 font-medium text-gray-500 whitespace-nowrap dark:text-white">{{ $product->created_at->format('M d, Y h:i A') }}</th>
                                                 <td class="px-4 py-3">{{ $product->subjectMatter }}</td>
                                                 <td class="px-4 py-3">{{ $product->statuss }}</td>
                                                 <td class="px-4 py-3">{{ $product->actionUnit }}</td>
                                                 <td class="px-4 py-3">{{ $product->dateReleased }}</td>
-                                                <td class="px-4 py-3">{{ $product->nameofpersonnel }}</td>
+                                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $product->nameofpersonnel }}</th>
                                                 <td class="px-4 py-3">{{ $product->initialReceived }}</td>
                                                 <td class="px-4 py-3">{{ $product->trackingNumber }}</td>
                                                 <td class="px-4 py-3 flex items-center justify-end">

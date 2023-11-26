@@ -5,14 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
+
+use function Pest\Laravel\post;
+
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+
+
+
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::paginate(20);
 
         return view('posts.index', compact('posts'));
     }
@@ -59,7 +66,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -75,6 +82,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect(route('products.index'))->with('status', 'User Successfully Deleted!');
     }
 }

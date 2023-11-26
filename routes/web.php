@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/products/{product}/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
+    Route::get('search_data', [PostController::class, 'search_data']);
+
     Route::resources([
         'users' => UserController::class,
         'posts' => PostController::class,
