@@ -13,7 +13,17 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = Product::paginate(20);
+        $products = Product::paginate(10);
+
+        return view('products.index', compact('products'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $products = Product::where('controlNumber', 'like', "%$search%")
+            ->orWhere('trackingNumber', 'like', "%$search%")->paginate();
+
 
         return view('products.index', compact('products'));
     }
@@ -34,12 +44,14 @@ class ProductController extends Controller
         // Validate new user data
         $validated = $request->validate([
             'controlNumber' => ['required', 'max:255'],
-            'sourceofmail' => ['required', 'max:255'],
-            'subjectMatter' => ['required', 'max:255'],
-            'statuss' => ['required', 'max:255'],
-            'actionUnit' => ['required', 'max:255'],
+            'sourceofmail' => ['required'],
+            'dateReceived' => ['required'],
+            'timeReceived' => ['required'],
+            'subjectMatter' => ['required'],
+            'statuss' => ['required'],
+            'actionUnit' => ['required'],
             'dateReleased' => ['required', 'date'],
-            'nameofpersonnel' => ['required', 'max:255'],
+            'nameofpersonnel' => ['required'],
             'initialReceived' => ['required', 'max:25'],
             'trackingNumber' => ['required', 'max:25'],
         ]);
@@ -61,7 +73,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $user)
+    public function edit(Product $product)
     {
         return view('products.edit', compact('product'));
     }
@@ -71,8 +83,42 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $validated = $request->validate([
+            'controlNumber' => ['required', 'max:255'],
+            'sourceofmail' => ['required'],
+            'dateReceived' => ['required'],
+            'timeReceived' => ['required'],
+            'subjectMatter' => ['required'],
+            'statuss' => ['required'],
+            'actionUnit' => ['required'],
+            'dateReleased' => ['required', 'date'],
+            'nameofpersonnel' => ['required'],
+            'initialReceived' => ['required', 'max:25'],
+            'trackingNumber' => ['required', 'max:25'],
+        ]);
+        // Update user
+        $product->update($validated);
+
+        return redirect(route('products.edit', $product))->with('status', 'Product Updated!');
+    }
+
+    public function destroy(Product $product)
+    {
         $product->delete();
 
         return redirect(route('products.index'))->with('status', 'User Successfully Deleted!');
+    }
+
+
+    public function deleteAllp()
+    {
+
+        try {
+            Product::truncate();
+
+            return redirect()->route('products.index')->with('success', 'All posts deleted successfully');
+        } catch (\Exception $e) {
+            return redirect()->route('products.index')->with('error', 'Error deleting posts: ' . $e->getMessage());
+        }
     }
 }

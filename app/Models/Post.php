@@ -15,7 +15,13 @@ class Post extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'datefiled',
         'fullname',
-        'email', 'profession', 'contactNumber', 'srfNumber', 'status', 'datesent',
+        'email',
+        'profession',
+        'contactNumber',
+        'srfNumber',
+        'status',
+        'datesent',
     ];
 }

@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('controlNumber');
             $table->string('sourceofmail');
+            $table->date('dateReceived');
+            $table->time('timeReceived');
             $table->string('subjectMatter');
             $table->string('statuss');
             $table->string('actionUnit');

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Post;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::get('/dashboard', function () {
@@ -47,16 +49,22 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/posts/{post}/update', [PostController::class, 'update'])->name('posts.update');
     //  Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy'])->name('posts.destroy');
 
+    // Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    // Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    // Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+    // Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    // Route::patch('/products/{product}/update', [ProductController::class, 'update'])->name('products.update');
+    // Route::delete('/products/{product}/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
 
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::patch('/products/{product}/update', [ProductController::class, 'update'])->name('products.update');
-    Route::delete('/products/{product}/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
+
+    Route::get('/generate-pdf', [PostController::class, 'generatePdf'])->name('generate.pdf');
+    Route::get('/delete-all-posts', [PostController::class, 'deleteAll'])->name('posts.deleteAll');
+    Route::get('/delete-all-products', [ProductController::class, 'deleteAllp'])->name('products.deleteAllp');
+    Route::get('/products/search', [ProductController::class, 'search']);
+    //  Route::post('/posts/{print}/print', [PostController::class, 'generatePdf'])->name('generate');
 
 
-    Route::get('search_data', [PostController::class, 'search_data']);
+
 
     Route::resources([
         'users' => UserController::class,
@@ -64,5 +72,7 @@ Route::middleware('auth')->group(function () {
         'products' => ProductController::class,
     ]);
 });
+
+
 
 require __DIR__ . '/auth.php';

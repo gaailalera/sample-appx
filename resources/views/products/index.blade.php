@@ -5,21 +5,21 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-1">
+        <div class="max-w-screen-2x mx-60 mr-1 sm:px-6 lg:px-5">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
                 <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-                    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+                    <div class="mx-auto max-w-screen-2xl px-4 lg:px-1">
                         <!-- Start coding here -->
                         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                                 <div class="w-full md:w-1/2">
-                                    <form class="flex items-center">
-                                        <label for="simple-search" class="sr-only">Search</label>
+                                    <form action="/products/search" class="flex items-center" method="GET">
+                                        <label for="simple-search" name="search" class="sr-only">Search</label>
                                         <div class="relative w-full">
                                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@
                                                 </li>
                                             </ul>
                                             <div class="py-1">
-                                                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete all</a>
+                                                <a href="{{ route('products.deleteAllp')}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete all</a>
                                             </div>
                                         </div>
                                         <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
@@ -98,7 +98,9 @@
                                             <th scope="col" class="px-4 py-3">NO.</th>
                                             <th scope="col" class="px-4 py-3">Control Number</th>
                                             <th scope="col" class="px-4 py-3">Source of Mail</th>
-                                            <th scope="col" class="px-4 py-3">Date/Time Received</th>
+                                            <th scope="col" class="px-4 py-3">Date Received</th>
+                                            <th scope="col" class="px-4 py-3">Time Received</th>
+                                           {{-- <th scope="col" class="px-4 py-3">Date/Time Received</th>--}}
                                             <th scope="col" class="px-4 py-3">Subject Matter</th>
                                             <th scope="col" class="px-4 py-3">Status</th>
                                             <th scope="col" class="px-4 py-3">Action Unit</th>
@@ -117,7 +119,9 @@
                                                 <td class="px-4 py-3">{{ $product->id }}</td>
                                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $product->controlNumber }}</th>
                                                 <td class="px-4 py-3">{{ $product->sourceofmail }}</td>
-                                                <th scope="row" class="px-4 py-3 font-medium text-gray-500 whitespace-nowrap dark:text-white">{{ $product->created_at->format('M d, Y h:i A') }}</th>
+                                                <td class="px-4 py-3">{{ $product->dateReceived }}</td>
+                                                <td class="px-4 py-3">{{ $product->timeReceived }}</td>
+                                              {{--  <th scope="row" class="px-4 py-3 font-medium text-gray-500 whitespace-nowrap dark:text-white">{{ $product->created_at->format('M d, Y h:i A') }}</th>--}}
                                                 <td class="px-4 py-3">{{ $product->subjectMatter }}</td>
                                                 <td class="px-4 py-3">{{ $product->statuss }}</td>
                                                 <td class="px-4 py-3">{{ $product->actionUnit }}</td>
@@ -129,13 +133,13 @@
 
 
 
-                                                    <button id="{{ str($product->name)->slug() }}-button" data-dropdown-toggle="{{ str($product->name)->slug() }}" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                    <button id="{{ str($product->id)->slug() }}-button" data-dropdown-toggle="{{ str($product->id)->slug() }}" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                                                         </svg>
                                                     </button>
-                                                    <div id="{{ str($product->name)->slug() }}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="{{ str($product->name)->slug() }}-button">
+                                                    <div id="{{ str($product->id)->slug() }}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="{{ str($product->id)->slug() }}-button">
                                                             <li>
                                                                 <a href="{{ route('products.edit', $product) }}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                                             </li>

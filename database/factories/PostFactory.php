@@ -17,6 +17,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
+            'datefiled' => fake()->date(),
             'fullname' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'profession' => fake()->randomElement(),

@@ -19,6 +19,8 @@ class ProductFactory extends Factory
         return [
             'controlNumber' => fake()->name(),
             'sourceofmail' => fake()->company(),
+            'dateReceived' => fake()->date(),
+            'timeReceived' => fake()->time(),
             'subjectMatter' => fake()->randomElement(),
             'statuss' => fake()->randomElement(),
             'actionUnit' => fake()->randomElement(),
@@ -26,7 +28,6 @@ class ProductFactory extends Factory
             'nameofpersonnel' => fake()->randomElement(),
             'initialReceived' => fake()->word(),
             'trackingNumber' => fake()->address(),
-
         ];
     }
 }

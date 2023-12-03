@@ -17,6 +17,8 @@ class Product extends Model
     protected $fillable = [
         'controlNumber',
         'sourceofmail',
+        'dateReceived',
+        'timeReceived',
         'subjectMatter',
         'statuss',
         'actionUnit',
