@@ -14,8 +14,8 @@
                             </svg>
                          </button>
          <a href="{{ route('dashboard') }}" class="flex ms-2 md:me-24">
-           <x-application-logo  class="h-8 me-3" alt="FlowBite Logo" />
-           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Professional Regulation Commission - CAR</span>
+           <x-application-logo  class="h-8 me-3" alt="$" />
+           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">PRC Inventory Management System</span>
          </a> 
        </div>
        <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -100,7 +100,7 @@
  
  <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
     <div class="h-full px-7 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-       <ul class="space-y-2 font-medium">
+       <ul class="space-y-2 font-medium ">
           <li>
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="flex items-center p-2 text-lg text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">

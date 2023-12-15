@@ -18,7 +18,7 @@
                         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                                 <div class="w-full md:w-1/2">
-                                    <form  class="flex items-center" >
+                                    <form action="{{ route('posts.index')}}"  class="flex items-center" method="GET" >
                                         <label for="simple-search"  class="sr-only">Search</label>
                                         <div class="relative w-full">
                                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -26,7 +26,7 @@
                                                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                                 </svg>
                                             </div>
-                                            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+                                            <input type="text" id="simple-search" name="searchh" value="{{ request('searchh') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
                                         </div>
                                     </form>
                                 </div>
@@ -55,22 +55,24 @@
                                             </div>
                                         </div>
                                     
-                                        <a href="{{ route('generate.pdf') }}" target="_blank" <button type="button" 
-                                         class="w-full md:w-auto flex items-center
-                                        justify-center py-2 px-4 text-sm font-medium
-                                         text-gray-900 focus:outline-none bg-white
-                                         rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4
-                                        focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white 
-                                        dark:hover:bg-gray-700" type="button">Print PDF</button></a>
+                                        <a href="{{ route('generate.pdf') }}" target="_blank" <button type="button" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                            <span class="relative py-3 px-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                               Print PDF
+                                            </span>
+                                            </button> 
+                                                          
+                                       </a>
                                     </div>
                                 </div>
                             </div>
+
+                                {{-- KUNG PAPALITAN MO TABLE, DITO KA MAG START --}}
+
                             <div class="overflow-x-auto">
+                                
                                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                        
-                                        <tr>
-                                           
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">                      
+                                        <tr>                   
                                      {{--   <th scope="col" class="px-4 py-3">Created Date</th> --}}
                                             <th scope="col" class="px-4 py-3">Date filed</th>   
                                             <th scope="col" class="px-4 py-3">Full name</th>
@@ -87,18 +89,17 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($posts as $post)
-                                            <tr class="border-b dark:border-gray-700">
-                                          
-                                                <td class="px-4 py-3">{{ $post->datefiled }}</td>
+                                            <tr class="border-b dark:border-gray-700">      
+                                                <td class="px-4 py-3">{{ \Carbon\Carbon::parse($post->datefiled)->format('M d, Y') }}</td>
                                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $post->fullname }}</th>
                                                 <td class="px-4 py-3">{{ $post->profession }}</td>
                                                 <td class="px-4 py-3">{{ $post->email }}</td>
                                                 <td class="px-4 py-3">{{ $post->contactNumber }}</td>
                                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $post->srfNumber }}</th>
-                                                <td class="px-4 py-3">{{ $post->datesent }}</td>
+                                                <td class="px-4 py-3">{{ \Carbon\Carbon::parse($post->datesent)->format('M d, Y') }}</td>
                                                 <td class="px-4 py-3">{{ $post->status }}</td>
                                                 <td class="px-4 py-3 flex items-center justify-end">
- {{--    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $post->id }}</th> --}}
+                                           {{--    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $post->id }}</th> --}}
                                            {{-- <th scope="row" class="px-4 py-3 font-medium text-gray-500 whitespace-nowrap dark:text-white">{{ $post->created_at->format('M d, Y h:i A') }}</th>  --}}
                                             
 

@@ -18,7 +18,7 @@
                         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                                 <div class="w-full md:w-1/2">
-                                    <form action="/products/search" class="flex items-center" method="GET">
+                                    <form action="{{ route('products.index') }}" class="flex items-center" method="GET">
                                         <label for="simple-search" name="search" class="sr-only">Search</label>
                                         <div class="relative w-full">
                                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -26,7 +26,7 @@
                                                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                                 </svg>
                                             </div>
-                                            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+                                            <input type="text" id="simple-search" name="search" value="{{ request('search') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search">
                                         </div>
                                     </form>
                                 </div>
@@ -64,38 +64,26 @@
                                             </svg>
                                         </button>
                                         <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
-                                            <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Choose brand</h6>
+                                            <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Choose</h6>
                                             <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                                 <li class="flex items-center">
                                                     <input id="apple" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Apple (56)</label>
+                                                    <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">N/A</label>
                                                 </li>
-                                                <li class="flex items-center">
-                                                    <input id="fitbit" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Microsoft (16)</label>
-                                                </li>
-                                                <li class="flex items-center">
-                                                    <input id="razor" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="razor" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Razor (49)</label>
-                                                </li>
-                                                <li class="flex items-center">
-                                                    <input id="nikon" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="nikon" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Nikon (12)</label>
-                                                </li>
-                                                <li class="flex items-center">
-                                                    <input id="benq" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="benq" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">BenQ (74)</label>
-                                                </li>
+                                        
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                                    {{-- KUNG PAPALITAN MO TABLE, DITO KA MAG START --}}
+
                             <div class="overflow-x-auto">
                                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr>
-                                            <th scope="col" class="px-4 py-3">NO.</th>
+                                
                                             <th scope="col" class="px-4 py-3">Control Number</th>
                                             <th scope="col" class="px-4 py-3">Source of Mail</th>
                                             <th scope="col" class="px-4 py-3">Date Received</th>
@@ -116,16 +104,16 @@
                                     <tbody>
                                         @foreach ($products as $product)
                                             <tr class="border-b dark:border-gray-700">
-                                                <td class="px-4 py-3">{{ $product->id }}</td>
+                                               
                                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $product->controlNumber }}</th>
                                                 <td class="px-4 py-3">{{ $product->sourceofmail }}</td>
-                                                <td class="px-4 py-3">{{ $product->dateReceived }}</td>
-                                                <td class="px-4 py-3">{{ $product->timeReceived }}</td>
+                                                <td class="px-4 py-3">{{ \Carbon\Carbon::parse($product->dateReceived)->format('M d, Y') }}</td>
+                                                <td class="px-4 py-3">{{ \Carbon\Carbon::parse($product->timeReceived)->format('h:i A') }}</td>
                                               {{--  <th scope="row" class="px-4 py-3 font-medium text-gray-500 whitespace-nowrap dark:text-white">{{ $product->created_at->format('M d, Y h:i A') }}</th>--}}
                                                 <td class="px-4 py-3">{{ $product->subjectMatter }}</td>
                                                 <td class="px-4 py-3">{{ $product->statuss }}</td>
                                                 <td class="px-4 py-3">{{ $product->actionUnit }}</td>
-                                                <td class="px-4 py-3">{{ $product->dateReleased }}</td>
+                                                <td class="px-4 py-3">{{ \Carbon\Carbon::parse($product->dateReleased)->format('M d, Y') }}</td>
                                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $product->nameofpersonnel }}</th>
                                                 <td class="px-4 py-3">{{ $product->initialReceived }}</td>
                                                 <td class="px-4 py-3">{{ $product->trackingNumber }}</td>

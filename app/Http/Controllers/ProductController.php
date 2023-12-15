@@ -10,23 +10,15 @@ class ProductController extends Controller
 
 {
 
-    public function index()
-    {
-
-        $products = Product::paginate(10);
-
-        return view('products.index', compact('products'));
-    }
-
-    public function search(Request $request)
+    public function index(Request $request)
     {
         $search = $request->input('search');
         $products = Product::where('controlNumber', 'like', "%$search%")
             ->orWhere('trackingNumber', 'like', "%$search%")->paginate();
 
-
         return view('products.index', compact('products'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -55,7 +47,6 @@ class ProductController extends Controller
             'initialReceived' => ['required', 'max:25'],
             'trackingNumber' => ['required', 'max:25'],
         ]);
-
         // Create a new user
         $product = Product::create($validated);
 

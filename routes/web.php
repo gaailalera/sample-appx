@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
+    // KAHIT NAKA COMMENT OUT MGA TO, GAGANA CRUD NOOB //
+
     // Route::get('/users', [UserController::class, 'index'])->name('users.index');
     // Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
     // Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
@@ -60,7 +62,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/generate-pdf', [PostController::class, 'generatePdf'])->name('generate.pdf');
     Route::get('/delete-all-posts', [PostController::class, 'deleteAll'])->name('posts.deleteAll');
     Route::get('/delete-all-products', [ProductController::class, 'deleteAllp'])->name('products.deleteAllp');
-    Route::get('/products/search', [ProductController::class, 'search']);
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+
     //  Route::post('/posts/{print}/print', [PostController::class, 'generatePdf'])->name('generate');
 
 

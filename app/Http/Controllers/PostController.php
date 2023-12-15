@@ -16,9 +16,13 @@ class PostController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::paginate(20);
+        $searchh = $request->input('searchh');
+        $posts = Post::where('fullname', 'like', "%$searchh%")
+            ->orWhere('srfNumber', 'like', "%$searchh%")
+            ->orWhere('email', 'like', "%$searchh%")->paginate();
+
 
         return view('posts.index', compact('posts'));
     }
@@ -47,10 +51,10 @@ class PostController extends Controller
         $validated = $request->validate([
             'datefiled' => ['required', 'date'],
             'fullname' => ['required', 'max:255'],
+            'profession' => ['required'],
             'email' => ['required', 'max:255', 'unique:posts'],
             'contactNumber' => ['required', 'max:25'],
             'srfNumber' => ['required', 'max:25'],
-            'profession' => ['required'],
             'status' => ['required'],
             'datesent' => ['required', 'date'],
         ]);
@@ -83,12 +87,12 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $validated = $request->validate([
-            'datefiled' => ['required, date'],
+            'datefiled' => ['required', 'date'],
             'fullname' => ['required', 'max:255'],
+            'profession' => ['required'],
             'email' => ['required', 'max:255', 'unique:posts'],
             'contactNumber' => ['required', 'max:25'],
             'srfNumber' => ['required', 'max:25'],
-            'profession' => ['required'],
             'status' => ['required'],
             'datesent' => ['required', 'date'],
         ]);

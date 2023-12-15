@@ -25,35 +25,46 @@
                                     <x-input-error class="mt-2" :messages="$errors->get('controlNumber')" />
                                 </div>
                 
-                                <div class="sm:col-span-2">
+                                {{-- <div class="sm:col-span-2">
                                     <label for="sourceofmail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Source of Mail</label>
-                                    <select id="sourceofmail" name="sourceofmail" value="{{ $product->sourceofmail }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option selected="{{ $product->sourceofmail }}">Select source of mail</option>
+                                    <select id="sourceofmail" name="sourceofmail" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                       
                                         <option value="PRC ROSALES">PRC ROSALES</option>
                                         <option value="PRC MANILA">PRC MANILA</option>
                                         <option value="PRC CENTRAL">PRC CENTRAL</option>
                                         <option value="PRC ILOCOS SUR">PRC ILOCOS SUR</option>
                                     </select>
+                                </div> --}}
+                                
+                                <div class="sm:col-span-2">
+                                    <label for="sourceofmail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Source of Mail</label>
+                                    <input type="text" id="sourceofmail" name="sourceofmail" value="{{ $product->sourceofmail }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" list="sourceofmailList">
+                                    <datalist id="sourceofmailList">
+                                        <option value="PRC ROSALES">PRC ROSALES</option>
+                                        <option value="PRC MANILA">PRC MANILA</option>
+                                        <option value="PRC CENTRAL">PRC CENTRAL</option>
+                                        <option value="PRC ILOCOS SUR">PRC ILOCOS SUR</option>
+                                    </datalist>
                                 </div>
 
                                 
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="dateReceived" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date Released</label>
-                    <input type="date" name="dateReceived" id="dateReceived" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="" value="{{ old('dateReceived') }}">
+                    <label for="dateReceived" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date Received</label>
+                    <input type="date" name="dateReceived" id="dateReceived" value="{{ $product->dateReceived }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
                     <x-input-error class="mt-2" :messages="$errors->get('dateReceived')" />
                 </div> 
 
 
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="timeReceived" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Released</label>
-                    <input type="time" name="timeReceived" id="timeReceived" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="" value="{{ old('timeReceived') }}">
+                    <label for="timeReceived" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Received</label>
+                    <input type="time" name="timeReceived" id="timeReceived" value="{{ $product->timeReceived}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
                     <x-input-error class="mt-2" :messages="$errors->get('timeReceived')" />
                 </div> 
                 
                                 <div class="sm:col-span-2">
                                     <label for="subjectMatter" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subject Matter</label>
-                                    <select id="subjectMatter" name="subjectMatter" value="{{ $product->subjectMatter }}"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option selected="{{ $product->subjectMatter }}">Select subject Matter</option>
+                                    <select id="subjectMatter" name="subjectMatter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        <option value="{{ $product->subjectMatter }}" selected>{{ $product->subjectMatter }}</option>
                                         <option value="CERTIFICATE">CERTIFICATE</option>
                                         <option value="VARIOUS EXAM">VARIOUS EXAM</option>
                                         <option value="REQUEST LETTER">REQUEST LETTER</option>
@@ -63,8 +74,8 @@
                 
                                 <div class="sm:col-span-2">
                                     <label for="statuss" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                                    <select id="statuss" name="statuss" value="{{ $product->statuss }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option selected="{{ $product->statuss }}">Select status</option>
+                                    <select id="statuss" name="statuss" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        <option value="{{ $product->statuss }}" selected>{{ $product->statuss }}</option>
                                         <option value="PENDING">PENDING</option>
                                         <option value="RELEASED">RELEASED</option>
                                         <option value="RECEIVED">RECEIVED</option>
@@ -73,8 +84,8 @@
                      
                                 <div class="sm:col-span-2">
                                     <label for="actionUnit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Action Unit</label>
-                                    <select id="actionUnit" name="actionUnit" value="{{ $product->actionUnit }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option selected="{{ $product->actionUnit }}">Select action unit</option>
+                                    <select id="actionUnit" name="actionUnit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        <option value="{{ $product->actionUnit }}" selected>{{ $product->actionUnit }}</option>
                                         <option value="LRD - Application">LRD - Application</option>
                                         <option value="FAD - Records">FAD - Records</option>
                           
@@ -90,8 +101,8 @@
                 
                             <div class="col-span-2 sm:col-span-1">
                                 <label for="nameofpersonnel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name of personnel</label>
-                                <select id="nameofpersonnel" name="nameofpersonnel" value="{{ $product->nameofpersonnel}}"   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option selected="{{ $product->nameofpersonnel }}">Select category</option>
+                                <select id="nameofpersonnel" name="nameofpersonnel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <option value="{{ $product->nameofpersonnel }}" selected>{{ $product->nameofpersonnel }}</option>
                                     <option value="Myro">Myro</option>
                                     <option value="Mary Jane">Mary Jane</option>
                                     <option value="Jaycee">Jaycee</option>
