@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -19,10 +20,14 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
+    public function generatePPdf()
+    {
+        $products = Product::paginate(1000);
+        $pdf = PDF::loadHTML(view('products.index', compact('products')));
+        $pdf->setPaper('a3', 'landscape');
+        return $pdf->stream();
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('products.create');

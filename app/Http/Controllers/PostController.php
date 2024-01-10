@@ -19,6 +19,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $searchh = $request->input('searchh');
+
         $posts = Post::where('fullname', 'like', "%$searchh%")
             ->orWhere('srfNumber', 'like', "%$searchh%")
             ->orWhere('email', 'like', "%$searchh%")->paginate();
@@ -53,7 +54,7 @@ class PostController extends Controller
             'fullname' => ['required', 'max:255'],
             'profession' => ['required'],
             'email' => ['required', 'max:255', 'unique:posts'],
-            'contactNumber' => ['required', 'max:25'],
+            'contactNumber' => ['required', 'max:12'],
             'srfNumber' => ['required', 'max:25'],
             'status' => ['required'],
             'datesent' => ['required', 'date'],

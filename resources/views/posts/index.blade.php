@@ -10,7 +10,9 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                 <!-- Session Status -->
-                <x-auth-session-status class="mb-4" :status="session('status')" />
+           <x-auth-session-status class="mb-4" :status="session('status')" /> 
+
+         
 
                 <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
                     <div class="mx-auto max-w-screen-2xl px-4 lg:px-1">
@@ -66,8 +68,6 @@
                                 </div>
                             </div>
 
-                                {{-- KUNG PAPALITAN MO TABLE, DITO KA MAG START --}}
-
                             <div class="overflow-x-auto">
                                 
                                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -87,6 +87,7 @@
                                             </th> 
                                         </tr>
                                     </thead>
+                               
                                     <tbody>
                                         @foreach ($posts as $post)
                                             <tr class="border-b dark:border-gray-700">      
@@ -108,9 +109,7 @@
                                                             <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                                                         </svg>
                                                     </button>
-
-                                                    
-                                                    
+                                         
                                                     <div id="{{ str($post->id)->slug() }}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="{{ str($post->id)->slug() }}-button">
                                                             <li>

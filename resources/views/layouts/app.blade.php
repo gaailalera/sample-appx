@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+        <link rel="icon" href="prclogo.png" type="image/gif">
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -17,16 +18,16 @@
     <style>
                 .sentence::after {
                 content: '';
-                position: absolute;
+                position: absolute;   
                 right: -20px;
                 bottom: 6px;
                     width: 14px;
                     height: 2px;
                 background-color: #DAFDBA;
-                animation: blink 0.5s linear infinite;
+                animation: normal 0.5s linear infinite;
                 }
 
-                    @keyframes blink {
+                    @keyframes normal {
                     0% {
                         opacity: 1;
                     }
@@ -47,20 +48,22 @@
                     </div>
                 </header>
             @endif
-
+        
             <!-- Page Content -->
             <main>
                 {{ $slot }}
+                
             </main>
         </div>
+        
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const sentences = [
-                    'Hello! Welcome to PRC Inventory Management System.',
-                    'sheshhh',
-                    'PRC ensures professional standards with integrity.',
-                    'Upholding competence, fostering trust, shaping professional futures.',
-                    'In PRC, quality standards meet dedication for professional excellence.',               
+                    'HELLO! WELCOME TO PRC INVENTORY MANAGEMENT SYSTEM.',
+                    'SHESHHH',
+                    'PRC ENSURES PROFESSIONAL STANDARDS WITH INTEGRITY.',
+                    'UPHOLDING COMPETENCE, FOSTERING TRUST, SHAPING PROFESSIONAL FUTURES.',
+                    'IN PRC, QUALITY STANDARDS MEET DEDICATION FOR PROFESSIONAL EXCELLENCE.',               
                     ];
                     
                                 let currentIndex = 0;

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -18,6 +20,16 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
+
+    public function countPosts()
+    {
+        $posts = Post::count();
+        $products = Product::count();
+        $users = User::count();
+
+        // Pass the totalRows variable to the view
+        return view('dashboard', compact('posts', 'products', 'users'));
+    }
     /**
      * Show the form for creating a new resource.
      */
